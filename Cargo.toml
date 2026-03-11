@@ -1,0 +1,28 @@
+[package]
+name = "ferrite-nucleo-l4a6zg"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ferrite-sdk = { path = "../iotai_sdk/ferrite-sdk", features = ["cortex-m", "embassy"] }
+cortex-m = { version = "0.7", features = ["inline-asm", "critical-section-single-core"] }
+cortex-m-rt = "0.7"
+embassy-executor = { version = "0.5", features = ["arch-cortex-m", "executor-thread", "integrated-timers"] }
+embassy-stm32 = { version = "0.1", features = ["stm32l4a6zg", "time-driver-any", "exti", "memory-x"] }
+embassy-time = "0.3"
+defmt = "0.3"
+defmt-rtt = "0.4"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+
+[[bin]]
+name = "ferrite-nucleo-l4a6zg"
+path = "src/main.rs"
+
+[profile.release]
+debug = 2
+lto = true
+opt-level = "s"
+
+[profile.dev]
+debug = 2
+opt-level = 1
